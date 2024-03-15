@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Script;
+using Script.Enum;
 using Script.Module;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ public class BanCo : MonoBehaviour
     [ContextMenu("intitBanCo")]
     public void InitBanCo()
     {
-        KhoangCachOCo = 900f / 9f;
+        //KhoangCachOCo = 105f;
         
         basePosition = new Vector3(-4f * KhoangCachOCo, -4.5f * KhoangCachOCo, 0);
         _oCos = new OCo[9][];
@@ -43,8 +44,17 @@ public class BanCo : MonoBehaviour
                 OCoClone.transform.localScale = Vector3.one;
                 OCoClone.transform.localPosition = TinhToanViTriOCo(i, j);
                 _oCos[i][j] = OCoClone.GetComponent<OCo>();
+                _oCos[i][j].SetLocation(new CLocation(i,j));
             }
         }
+
+        
+    }
+
+    [ContextMenu("check")]
+    public void Check()
+    {
+        Debug.Log(_oCos[0][0].CurrentQuanCo.Info.Name);
     }
     public Vector3 TinhToanViTriOCo(int i, int j)
     {
@@ -117,12 +127,27 @@ public class BanCo : MonoBehaviour
             GameObject Obj = GameObject.Instantiate(ResourceController.Instance.GetGameObject(tmp.Path));
             Obj.transform.SetParent(cacQuanCo.transform);
             QuanCo k = Obj.GetComponent<QuanCo>();
-            k.SetViTriDauTien(tmp.X,tmp.Y);
+            k.SetViTriDauTien(tmp);
             listQuanCo.Add(k);
-            
+            _oCos[tmp.X][tmp.Y].SetCurrentPeice(k);
         }
         
         
     }
-    
+
+    private OCo OCoChonTruocDo;
+
+    public void SetOCoChonTruocDo(int x, int y)
+    {
+        OCoChonTruocDo = OCos[x][y];
+    }
+
+    public void BoChonOcoTruocDo()
+    {
+        if (OCoChonTruocDo != null)
+        {
+            OCoChonTruocDo.trangThai = EOcoState.Normal;
+            OCoChonTruocDo = null;
+        }
+    }
 }

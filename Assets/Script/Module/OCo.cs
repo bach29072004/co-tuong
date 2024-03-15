@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using Script;
 using Script.Enum;
 using UnityEditor;
 using UnityEngine;
@@ -9,7 +10,7 @@ using UnityEngine.UI;
 
 public class OCo : MonoBehaviour
 {
-    public Button btnTargetn;
+    public Button btnTarget;
     public Button btnSelect;
     private EQuanCoColor _color;
 
@@ -50,10 +51,15 @@ public class OCo : MonoBehaviour
             switch (_trangThai)
             {
                 case EOcoState.Normal:
+                    btnTarget.gameObject.SetActive(false);
+                    if (CurrentQuanCo != null)
+                        CurrentQuanCo.UnSelected();
                     break;
                 case EOcoState.Selected:
+                    
                     break;
                 case EOcoState.Target:
+                    btnTarget.gameObject.SetActive(true);
                     break;
                 default:
                     break;
@@ -63,20 +69,19 @@ public class OCo : MonoBehaviour
     }
 
 
-    private QuanCo _currentQuanCo;
+    public QuanCo CurrentQuanCo;
+    public CLocation Location { get; private set; }
 
+    public void SetLocation(CLocation location)
+    {
+        Location = location;
+    }
     public void Start()
     {
         trangThai = EOcoState.Normal;
-        btnSelect.onClick.AddListener(() => SelectedClick());
-        btnTargetn.onClick.AddListener(() => TargetClick());
+        btnTarget.onClick.AddListener(() => TargetClick());
     }
-
-    public void SelectedClick()
-    {
-        
-    }
-
+    
     public void TargetClick()
     {
         
@@ -93,6 +98,16 @@ public class OCo : MonoBehaviour
             Color = EQuanCoColor.Black;
         }
     }
-    
-    
+
+    public void SetCurrentPeice(QuanCo quanCo)
+    {
+        CurrentQuanCo = quanCo;
+    }
+
+    public void MakeAMove(OCo targetOCo)
+    {
+        CurrentQuanCo.Move(targetOCo);
+        SetCurrentPeice(null);
+        trangThai = EOcoState.Normal;
+    }
 }

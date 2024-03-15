@@ -77,5 +77,4 @@ public class ResourceController
 
         return _dictObj[path];
     }
-    
 }

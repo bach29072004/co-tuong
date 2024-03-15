@@ -1,21 +1,41 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Script;
+using Script.Module;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class QuanCo : MonoBehaviour
 {
-    [SerializeField]
-    private Vector3 offsetPosition;
-    private Vector2 viTriDauTien;
-    public Vector2 viTriTrenBanCo;
+    public Button btnSelect;
+    //[SerializeField]
+    private Vector3 offsetPosition = new Vector3(-420,-462,0);
+    public QuanCoInfo Info;
+    
+    public CLocation Location;
     public EPlayer player;
-    public abstract void Move();
-
-    public void SetViTriDauTien(int x, int y)
+    public List<OCo> ListOCoTaget = new List<OCo>();
+    public Transform renderer;
+    public void SetViTriDauTien(QuanCoInfo info)
     {
-        viTriDauTien = new Vector2(x, y);
+        Info = info;
+        Location = new CLocation(info.X, info.Y);
+        renderer.localScale = new Vector3(60f, 60f, 60f);
         transform.localScale = Vector3.one;
-        transform.localPosition = offsetPosition + new Vector3(x*BanCo.instance.KhoangCachOCo, y*BanCo.instance.KhoangCachOCo, 0);
+        transform.localPosition = offsetPosition + new Vector3(info.X*BanCo.instance.KhoangCachOCo, info.Y*BanCo.instance.KhoangCachOCo, 0);
     }
+
+    public void SetNewLocation(CLocation newLocation)
+    {
+        Location = newLocation;
+        transform.localPosition = offsetPosition + new Vector3(Location.X*BanCo.instance.KhoangCachOCo, Location.Y*BanCo.instance.KhoangCachOCo, 0);
+    }
+
+    public abstract void Move(OCo targetOco);
+    public abstract void BeSelected();
+    public abstract void BlackSelected();
+    public abstract void RedSelected();
+    public abstract void UnSelected();
 }
