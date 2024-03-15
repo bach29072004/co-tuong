@@ -2,6 +2,6 @@
 {
     public enum EOcoState
     {
-        Normal,Select
+        Normal,Selected,Target
     }
 }

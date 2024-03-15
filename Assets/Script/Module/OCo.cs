@@ -3,10 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using Script.Enum;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OCo : MonoBehaviour
 {
+    public Button btnTargetn;
+    public Button btnSelect;
     private EQuanCoColor _color;
 
     public EQuanCoColor Color
@@ -31,16 +35,52 @@ public class OCo : MonoBehaviour
             }
         }
     }
-    public EOcoState TrangThai;
+
+    private EOcoState _trangThai;
+
+    public EOcoState trangThai
+    {
+        get
+        {
+            return _trangThai;
+        }
+        set
+        {
+            _trangThai = value;
+            switch (_trangThai)
+            {
+                case EOcoState.Normal:
+                    break;
+                case EOcoState.Selected:
+                    break;
+                case EOcoState.Target:
+                    break;
+                default:
+                    break;
+                
+            }
+        }
+    }
 
 
     private QuanCo _currentQuanCo;
-    
-    public void ThayDoiTrangThai(EOcoState trangThai)
+
+    public void Start()
+    {
+        trangThai = EOcoState.Normal;
+        btnSelect.onClick.AddListener(() => SelectedClick());
+        btnTargetn.onClick.AddListener(() => TargetClick());
+    }
+
+    public void SelectedClick()
     {
         
     }
 
+    public void TargetClick()
+    {
+        
+    }
     [ContextMenu("changcolor")]
     public void ChangeColor()
     {
@@ -54,8 +94,5 @@ public class OCo : MonoBehaviour
         }
     }
     
-    protected void OnMouseEnter()
-    {
-        Debug.Log("mouseDown");
-    }
+    
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Script.Module;
 using UnityEngine;
 
 public class ResourceController
@@ -64,4 +65,17 @@ public class ResourceController
 
     
     #endregion
+    // lay gameObject tu resourse
+    private Dictionary<string, GameObject> _dictObj = new Dictionary<string, GameObject>();
+
+    public GameObject GetGameObject(string path)
+    {
+        if (_dictObj.ContainsKey(path) == false)
+        {
+            _dictObj.Add(path,Resources.Load<GameObject>(path));
+        }
+
+        return _dictObj[path];
+    }
+    
 }
