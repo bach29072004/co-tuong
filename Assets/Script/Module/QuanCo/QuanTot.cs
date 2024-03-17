@@ -7,24 +7,24 @@ using UnityEngine;
 
 public class QuanTot : QuanCo
 {
-    private bool _isQuaSong;
 
     private void Start()
     {
-        _isQuaSong = false;
         btnSelect.onClick.AddListener(BeSelected);
     }
 
     public override void Move(OCo targetOco)
     {
-        if (Location.Y > 5) _isQuaSong = true;
         SetNewLocation(targetOco.Location);
+        UnSelected();
     }
 
     public override void BeSelected()
     {
-        BanCo.instance.BoChonOcoTruocDo();
-        BanCo.instance.SetOCoChonTruocDo(Location.X,Location.Y);
+        OCo oCoChonTruocDo = BanCo.instance.OCoDangChon;
+        BanCo.instance.SetOCoDangChon(Location.X,Location.Y);
+        
+
         switch (player)
         {
             case EPlayer.Black:
@@ -38,13 +38,13 @@ public class QuanTot : QuanCo
 
     public override void BlackSelected()
     {
-        if (_isQuaSong)
+        if (Location.Y >= 5)
         {
             if (Location.X > 0)
-                ListOCoTaget.Add(BanCo.instance.OCos[Location.X - 1][Location.Y]);
-            if (Location.X < 8)
-            {
                 ListOCoTaget.Add(BanCo.instance.OCos[Location.X + 1][Location.Y]);
+            if (Location.X < 7)
+            {
+                ListOCoTaget.Add(BanCo.instance.OCos[Location.X -1 ][Location.Y]);
             }
         }
 
@@ -63,11 +63,11 @@ public class QuanTot : QuanCo
 
     public override void UnSelected()
     {
+        Debug.Log(this.Info.Name);
         foreach (var tar in ListOCoTaget)
         {
             tar.trangThai = EOcoState.Normal;
         }
         ListOCoTaget.Clear();
-        
     }
 }

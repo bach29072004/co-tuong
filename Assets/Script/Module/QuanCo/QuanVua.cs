@@ -26,6 +26,6 @@ public class QuanVua : QuanCo
 
     public override void UnSelected()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

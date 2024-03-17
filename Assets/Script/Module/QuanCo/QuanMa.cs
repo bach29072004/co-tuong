@@ -28,6 +28,6 @@ public class QuanMa : QuanCo
 
     public override void UnSelected()
     {
-        throw new NotImplementedException();
+       
     }
 }

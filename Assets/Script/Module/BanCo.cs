@@ -5,6 +5,7 @@ using Script;
 using Script.Enum;
 using Script.Module;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BanCo : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class BanCo : MonoBehaviour
     {
         instance = this;
     }
-    [ContextMenu("intitBanCo")]
+    //[ContextMenu("intitBanCo")]
     public void InitBanCo()
     {
         //KhoangCachOCo = 105f;
@@ -54,14 +55,15 @@ public class BanCo : MonoBehaviour
     [ContextMenu("check")]
     public void Check()
     {
-        Debug.Log(_oCos[0][0].CurrentQuanCo.Info.Name);
+        InitBanCo();
+        InitQuanCo();
     }
     public Vector3 TinhToanViTriOCo(int i, int j)
     {
         return basePosition + new Vector3(i * KhoangCachOCo, j * KhoangCachOCo, 0);
     }
     private List<QuanCo> listQuanCo;
-    [ContextMenu("InitQuanCO")]
+    //[ContextMenu("InitQuanCO")]
     public void InitQuanCo()
     {
         //Khoi tao quan co va rfset vi tri dau cho chung
@@ -135,19 +137,34 @@ public class BanCo : MonoBehaviour
         
     }
 
-    private OCo OCoChonTruocDo;
+    public OCo OCoDangChon;
 
-    public void SetOCoChonTruocDo(int x, int y)
+    public void SetOCoDangChon(int x, int y)
     {
-        OCoChonTruocDo = OCos[x][y];
-    }
-
-    public void BoChonOcoTruocDo()
-    {
-        if (OCoChonTruocDo != null)
+        if (OCoDangChon != null)
         {
-            OCoChonTruocDo.trangThai = EOcoState.Normal;
-            OCoChonTruocDo = null;
+            if (OCoDangChon.Location.X == x && OCoDangChon.Location.Y == y)
+            {
+                return;
+            }
+
+            OCo oCoChonTruocDo = OCoDangChon;
+            OCoDangChon = OCos[x][y];
+            oCoChonTruocDo.trangThai = EOcoState.Normal;
+            OCoDangChon.trangThai = EOcoState.Selected;
         }
+        else
+        {
+            OCoDangChon = OCos[x][y];
+            OCoDangChon.trangThai = EOcoState.Selected;
+        }
+    }
+    
+    public void MakeAMove(OCo targetOCo)
+    {
+        OCoDangChon.CurrentQuanCo.Move(targetOCo);
+        targetOCo.SetCurrentPeice(OCoDangChon.CurrentQuanCo);
+        OCoDangChon.SetCurrentPeice(null);
+        OCoDangChon.trangThai = EOcoState.Normal;
     }
 }

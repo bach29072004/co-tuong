@@ -26,6 +26,6 @@ public class QuanSi : QuanCo
 
     public override void UnSelected()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

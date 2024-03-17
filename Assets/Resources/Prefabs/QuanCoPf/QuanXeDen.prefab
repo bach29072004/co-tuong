@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btnSelect: {fileID: 4652933756784904413}
   player: 0
+  ListOCoTaget: []
   renderer: {fileID: 2799933857347581638}
 --- !u!1 &1579782913238995814
 GameObject:
@@ -244,7 +245,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: e355d63f2090a6d47b33719768861546, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 14dc06de05c25ff4a8c0c9fc4aa4a819, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

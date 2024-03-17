@@ -26,6 +26,6 @@ public class QuanPhao : QuanCo
 
     public override void UnSelected()
     {
-        throw new System.NotImplementedException();
+        
     }
 }
