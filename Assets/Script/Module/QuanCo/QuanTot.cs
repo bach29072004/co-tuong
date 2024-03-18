@@ -17,14 +17,15 @@ public class QuanTot : QuanCo
     {
         SetNewLocation(targetOco.Location);
         UnSelected();
+        
     }
 
     public override void BeSelected()
     {
+        if (player != BaseGameController.Instance.currentPlayer) return;
         OCo oCoChonTruocDo = BanCo.instance.OCoDangChon;
         BanCo.instance.SetOCoDangChon(Location.X,Location.Y);
         
-
         switch (player)
         {
             case EPlayer.Black:
@@ -58,7 +59,22 @@ public class QuanTot : QuanCo
 
     public override void RedSelected()
     {
-        throw new System.NotImplementedException();
+        if (Location.Y < 5)
+        {
+            if (Location.X > 0)
+                ListOCoTaget.Add(BanCo.instance.OCos[Location.X - 1][Location.Y]);
+            if (Location.X < 7)
+            {
+                ListOCoTaget.Add(BanCo.instance.OCos[Location.X + 1][Location.Y]);
+            }
+        }
+
+        if (Location.Y > 0)
+            ListOCoTaget.Add(BanCo.instance.OCos[Location.X][Location.Y -1]);
+        foreach (var tar in ListOCoTaget)
+        {
+            tar.trangThai = EOcoState.Target;
+        }
     }
 
     public override void UnSelected()

@@ -6,21 +6,8 @@ using UnityEngine;
 
 public class BaseGameController : MonoBehaviour
 {
-    private static BaseGameController _instance;
-
-    public static BaseGameController Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new BaseGameController();
-            }
-
-            return _instance;
-        }
-    }
-    private BaseGameController() {}
+    public static BaseGameController Instance;
+    
     private EGameState _gameState;
 
     public EGameState GameState
@@ -40,8 +27,27 @@ public class BaseGameController : MonoBehaviour
             }
         }
     }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
+        
         GameState = EGameState.Win;
+    }
+
+    public EPlayer currentPlayer = EPlayer.Black;
+
+    public void SwitchPlayer()
+    {
+        if (currentPlayer == EPlayer.Black)
+            currentPlayer = EPlayer.Red;
+        else
+        {
+            currentPlayer = EPlayer.Black;
+        }
     }
 }

@@ -162,9 +162,13 @@ public class BanCo : MonoBehaviour
     
     public void MakeAMove(OCo targetOCo)
     {
-        OCoDangChon.CurrentQuanCo.Move(targetOCo);
-        targetOCo.SetCurrentPeice(OCoDangChon.CurrentQuanCo);
-        OCoDangChon.SetCurrentPeice(null);
-        OCoDangChon.trangThai = EOcoState.Normal;
+        if (targetOCo.trangThai == EOcoState.Target)
+        {
+            OCoDangChon.CurrentQuanCo.Move(targetOCo);
+            targetOCo.SetCurrentPeice(OCoDangChon.CurrentQuanCo);
+            OCoDangChon.SetCurrentPeice(null);
+            OCoDangChon.trangThai = EOcoState.Normal;
+            BaseGameController.Instance.SwitchPlayer();
+        }
     }
 }
