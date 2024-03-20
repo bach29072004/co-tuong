@@ -10,11 +10,7 @@ public class QuanMa : QuanCo
     {
         throw new NotImplementedException();
     }
-
-    public override void BeSelected()
-    {
-        throw new NotImplementedException();
-    }
+    
 
     public override void BlackSelected()
     {
@@ -26,8 +22,7 @@ public class QuanMa : QuanCo
         throw new NotImplementedException();
     }
 
-    public override void UnSelected()
-    {
-       
-    }
+   
+
+    
 }

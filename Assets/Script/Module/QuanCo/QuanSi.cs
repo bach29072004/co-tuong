@@ -9,10 +9,7 @@ public class QuanSi : QuanCo
         
     }
 
-    public override void BeSelected()
-    {
-        throw new System.NotImplementedException();
-    }
+    
 
     public override void BlackSelected()
     {
@@ -24,8 +21,7 @@ public class QuanSi : QuanCo
         throw new System.NotImplementedException();
     }
 
-    public override void UnSelected()
-    {
-        
-    }
+   
+
+    
 }

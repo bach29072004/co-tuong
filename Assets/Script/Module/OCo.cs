@@ -53,7 +53,11 @@ public class OCo : MonoBehaviour
                 case EOcoState.Normal:
                     btnTarget.gameObject.SetActive(false);
                     if (CurrentQuanCo != null)
+                    {
+                        CurrentQuanCo.Eat = false;
                         CurrentQuanCo.UnSelected();
+                    }
+
                     break;
                 case EOcoState.Selected:
                     
@@ -62,7 +66,7 @@ public class OCo : MonoBehaviour
                     btnTarget.gameObject.SetActive(true);
                     if (CurrentQuanCo != null)
                     {
-                        
+                        CurrentQuanCo.Eat = true;
                     }
                     break;
                 default:

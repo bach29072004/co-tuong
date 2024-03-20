@@ -51,9 +51,8 @@ public class BanCo : MonoBehaviour
 
         
     }
-
-    [ContextMenu("check")]
-    public void Check()
+    
+    public void Start()
     {
         InitBanCo();
         InitQuanCo();

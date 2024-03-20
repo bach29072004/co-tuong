@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Script;
+using Script.Enum;
 using Script.Module;
 using UnityEditor;
 using UnityEngine;
@@ -18,6 +19,7 @@ public abstract class QuanCo : MonoBehaviour
     public EPlayer player;
     public List<OCo> ListOCoTaget = new List<OCo>();
     public Transform renderer;
+    public bool Eat = false;
     public void SetViTriDauTien(QuanCoInfo info)
     {
         Info = info;
@@ -34,8 +36,50 @@ public abstract class QuanCo : MonoBehaviour
     }
 
     public abstract void Move(OCo targetOco);
-    public abstract void BeSelected();
     public abstract void BlackSelected();
     public abstract void RedSelected();
-    public abstract void UnSelected();
+    public void BeSelected()
+    {
+    
+        if (!Eat)
+        {
+            SelectToMove();
+        }
+        else
+        {
+            BeEated();
+        }
+    
+    }
+   
+    public void UnSelected()
+    {
+        Debug.Log(this.Info.Name);
+        foreach (var tar in ListOCoTaget)
+        {
+            tar.trangThai = EOcoState.Normal;
+        }
+        ListOCoTaget.Clear();
+    }
+    public void SelectToMove()
+    {
+        if (player != BaseGameController.Instance.currentPlayer) return;
+        OCo oCoChonTruocDo = BanCo.instance.OCoDangChon;
+        BanCo.instance.SetOCoDangChon(Location.X,Location.Y);
+        
+        switch (player)
+        {
+            case EPlayer.Black:
+                BlackSelected();
+                break;
+            case EPlayer.Red:
+                RedSelected();
+                break;
+        }
+    }
+    public void BeEated()
+    {
+        BanCo.instance.MakeAMove(BanCo.instance.OCos[Location.X][Location.Y]);
+        Destroy(this.gameObject);
+    }
 }

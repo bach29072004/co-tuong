@@ -9,10 +9,7 @@ public class QuanTuong : QuanCo
         
     }
 
-    public override void BeSelected()
-    {
-        throw new System.NotImplementedException();
-    }
+    
 
     public override void BlackSelected()
     {
@@ -24,8 +21,6 @@ public class QuanTuong : QuanCo
         throw new System.NotImplementedException();
     }
 
-    public override void UnSelected()
-    {
-        
-    }
+   
+    
 }
