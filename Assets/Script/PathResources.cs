@@ -24,7 +24,7 @@
         public static string PathPopUpSetting = "Prefabs/PopUps/PopUpSetting";
         public static string PathPopUpThemTym = "Prefabs/PopUps/PopUpThemTym";
         public static string PathPopUpThongTinNguoiChoi = "Prefabs/PopUps/PopUpThongTinNguoiChoi";
-
+        
 
 
 

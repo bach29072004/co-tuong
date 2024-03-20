@@ -77,4 +77,13 @@ public class ResourceController
 
         return _dictObj[path];
     }
+
+    public GameObject Initiate(string path,Transform parent)
+    {
+        GameObject tmp = GameObject.Instantiate(GetGameObject(path));
+        tmp.transform.SetParent(parent);
+        tmp.transform.localPosition = Vector3.zero;
+        tmp.transform.localScale = Vector3.one;
+        return tmp;
+    }
 }

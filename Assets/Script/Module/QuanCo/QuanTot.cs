@@ -7,10 +7,21 @@ using UnityEngine;
 
 public class QuanTot : QuanCo
 {
-
+    public bool Eat;
     private void Start()
     {
-        btnSelect.onClick.AddListener(BeSelected);
+        Eat = true;
+        btnSelect.onClick.AddListener(() =>
+        {
+            if (!Eat)
+            {
+                BeSelected();
+            }
+            else
+            {
+                BeEated();
+            }
+        });
     }
 
     public override void Move(OCo targetOco)
@@ -20,6 +31,10 @@ public class QuanTot : QuanCo
         
     }
 
+    public void BeEated()
+    {
+        
+    }
     public override void BeSelected()
     {
         if (player != BaseGameController.Instance.currentPlayer) return;

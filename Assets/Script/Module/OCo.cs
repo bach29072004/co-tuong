@@ -60,6 +60,10 @@ public class OCo : MonoBehaviour
                     break;
                 case EOcoState.Target:
                     btnTarget.gameObject.SetActive(true);
+                    if (CurrentQuanCo != null)
+                    {
+                        
+                    }
                     break;
                 default:
                     break;
