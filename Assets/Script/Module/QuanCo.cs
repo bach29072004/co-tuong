@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Script;
 using Script.Enum;
 using Script.Module;
@@ -26,13 +27,16 @@ public abstract class QuanCo : MonoBehaviour
         Location = new CLocation(info.X, info.Y);
         renderer.localScale = new Vector3(60f, 60f, 60f);
         transform.localScale = Vector3.one;
-        transform.localPosition = offsetPosition + new Vector3(info.X*BanCo.instance.KhoangCachOCo, info.Y*BanCo.instance.KhoangCachOCo, 0);
+        transform.localPosition = offsetPosition + new Vector3(info.X*BanCo.Instance.KhoangCachOCo, info.Y*BanCo.Instance.KhoangCachOCo, 0);
     }
 
     public void SetNewLocation(CLocation newLocation)
     {
         Location = newLocation;
-        transform.localPosition = offsetPosition + new Vector3(Location.X*BanCo.instance.KhoangCachOCo, Location.Y*BanCo.instance.KhoangCachOCo, 0);
+        //transform.localPosition = offsetPosition + new Vector3(Location.X*BanCo.Instance.KhoangCachOCo, Location.Y*BanCo.Instance.KhoangCachOCo, 0);
+        transform.DOLocalMove(
+            offsetPosition + new Vector3(Location.X * BanCo.Instance.KhoangCachOCo,
+                Location.Y * BanCo.Instance.KhoangCachOCo, 0), 0.2f);
     }
 
     public abstract void Move(OCo targetOco);
@@ -64,8 +68,8 @@ public abstract class QuanCo : MonoBehaviour
     public void SelectToMove()
     {
         if (player != BaseGameController.Instance.currentPlayer) return;
-        OCo oCoChonTruocDo = BanCo.instance.OCoDangChon;
-        BanCo.instance.SetOCoDangChon(Location.X,Location.Y);
+        OCo oCoChonTruocDo = BanCo.Instance.OCoDangChon;
+        BanCo.Instance.SetOCoDangChon(Location.X,Location.Y);
         
         switch (player)
         {
@@ -79,7 +83,34 @@ public abstract class QuanCo : MonoBehaviour
     }
     public void BeEated()
     {
-        BanCo.instance.MakeAMove(BanCo.instance.OCos[Location.X][Location.Y]);
+        BanCo.Instance.MakeAMove(BanCo.Instance.OCos[Location.X][Location.Y]);
         Destroy(this.gameObject);
+    }
+
+    public void ChuyenListTargetSangTarget()
+    {
+        foreach (var tmp in ListOCoTaget)
+        {
+            if (tmp.CurrentQuanCo != null)
+            {
+                if (tmp.CurrentQuanCo.player != this.player) tmp.trangThai = EOcoState.Target;
+            }
+            else
+            {
+                tmp.trangThai = EOcoState.Target;
+            }
+        }
+    }
+}
+struct OCoDiChuyenVaBiChan
+{
+    public int X, Y, OChanX, OChanY;
+
+    public OCoDiChuyenVaBiChan(int x, int y, int oChanX,int oChanY)
+    {
+        X = x;
+        Y = y;
+        OChanX = oChanX;
+        OChanY = oChanY;
     }
 }

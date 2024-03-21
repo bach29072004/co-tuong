@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Script.Enum;
+using UnityEditor;
 using UnityEngine;
 
 public class QuanXe : QuanCo
@@ -20,38 +21,78 @@ public class QuanXe : QuanCo
     public override void BlackSelected()
     {
 
-        for (int Y = 0; Y < 10; Y++)
+        for (int Y = Location.Y - 1; Y >= 0; Y--)
         {
             if (Y != Location.Y)
-                ListOCoTaget.Add(BanCo.instance.OCos[Location.X][Y]);
+            {
+                ListOCoTaget.Add(BanCo.Instance.OCos[Location.X][Y]);
+                if (BanCo.Instance.OCos[Location.X][Y].CurrentQuanCo != null) break;
+            }
         }
-        for (int X = 0; X < 9; X++)
+        for (int Y = Location.Y + 1; Y <= 9; Y++)
+        {
+            if (Y != Location.Y)
+            {
+                ListOCoTaget.Add(BanCo.Instance.OCos[Location.X][Y]);
+                if (BanCo.Instance.OCos[Location.X][Y].CurrentQuanCo != null) break;
+            }
+        }
+        
+        for (int X = Location.X - 1; X >= 0; X--)
         {
             if (X != Location.X)
-                ListOCoTaget.Add(BanCo.instance.OCos[X][Location.Y]);
+            {
+                ListOCoTaget.Add(BanCo.Instance.OCos[X][Location.Y]);
+                if (BanCo.Instance.OCos[X][Location.Y].CurrentQuanCo != null) break;
+            }
         }
-        foreach (var tar in ListOCoTaget)
+        for (int X = Location.X + 1; X <= 8; X++)
         {
-            tar.trangThai = EOcoState.Target;
+            if (X != Location.X)
+            {
+                ListOCoTaget.Add(BanCo.Instance.OCos[X][Location.Y]);
+                if (BanCo.Instance.OCos[X][Location.Y].CurrentQuanCo != null) break;
+            }
         }
+        ChuyenListTargetSangTarget();
     }
 
     public override void RedSelected()
     {
-        for (int Y = 0; Y < 10; Y++)
+        for (int Y = Location.Y - 1; Y >= 0; Y--)
         {
             if (Y != Location.Y)
-                ListOCoTaget.Add(BanCo.instance.OCos[Location.X][Y]);
+            {
+                ListOCoTaget.Add(BanCo.Instance.OCos[Location.X][Y]);
+                if (BanCo.Instance.OCos[Location.X][Y].CurrentQuanCo != null) break;
+            }
         }
-        for (int X = 0; X < 9; X++)
+        for (int Y = Location.Y + 1; Y <= 9; Y++)
+        {
+            if (Y != Location.Y)
+            {
+                ListOCoTaget.Add(BanCo.Instance.OCos[Location.X][Y]);
+                if (BanCo.Instance.OCos[Location.X][Y].CurrentQuanCo != null) break;
+            }
+        }
+        
+        for (int X = Location.X - 1; X >= 0; X--)
         {
             if (X != Location.X)
-                ListOCoTaget.Add(BanCo.instance.OCos[X][Location.Y]);
+            {
+                ListOCoTaget.Add(BanCo.Instance.OCos[X][Location.Y]);
+                if (BanCo.Instance.OCos[X][Location.Y].CurrentQuanCo != null) break;
+            }
         }
-        foreach (var tar in ListOCoTaget)
+        for (int X = Location.X + 1; X <= 8; X++)
         {
-            tar.trangThai = EOcoState.Target;
+            if (X != Location.X)
+            {
+                ListOCoTaget.Add(BanCo.Instance.OCos[X][Location.Y]);
+                if (BanCo.Instance.OCos[X][Location.Y].CurrentQuanCo != null) break;
+            }
         }
+        ChuyenListTargetSangTarget();
     }
 
    

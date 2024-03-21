@@ -1,28 +1,72 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Script;
+using Script.Enum;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class QuanMa : QuanCo
 {
+    private void Start()
+    {
+        btnSelect.onClick.AddListener(BeSelected);
+        
+    }
+
     public override void Move(OCo targetOco)
     {
-        throw new NotImplementedException();
+        SetNewLocation(targetOco.Location);
+        UnSelected();
     }
-    
 
+    private List<OCoDiChuyenVaBiChan> _listCachDiChuyen = new List<OCoDiChuyenVaBiChan>()
+    {
+        new OCoDiChuyenVaBiChan(2,1,1 , 0),
+        new OCoDiChuyenVaBiChan(2,-1,1,0),
+        new OCoDiChuyenVaBiChan(-2,1,-1,0),
+        new OCoDiChuyenVaBiChan(-2,-1,-1,0),
+        new OCoDiChuyenVaBiChan(1,2,0,1),
+        new OCoDiChuyenVaBiChan(-1,2,0,1),
+        new OCoDiChuyenVaBiChan(1,-2,0,-1),
+        new OCoDiChuyenVaBiChan(-1,-2,0,-1)
+    };
+    
     public override void BlackSelected()
     {
-        throw new NotImplementedException();
+        
+        foreach (var vec in _listCachDiChuyen)
+        {
+            if (Location.X + vec.X >= 0 && Location.X + vec.X < 9 && Location.Y + vec.Y >= 0 && Location.Y + vec.Y < 10)
+            {
+                if (Location.X + vec.OChanX >= 0 && Location.X + vec.OChanX < 9 && Location.Y + vec.OChanY >= 0 && Location.Y + vec.OChanY < 10)
+                    if (BanCo.Instance.OCos[Location.X + vec.OChanX][Location.Y + vec.OChanY].CurrentQuanCo == null)
+                        ListOCoTaget.Add(BanCo.Instance.OCos[Location.X + vec.X][Location.Y + vec.Y]);
+            }
+        }
+
+        ChuyenListTargetSangTarget();
     }
 
     public override void RedSelected()
     {
-        throw new NotImplementedException();
+        foreach (var vec in _listCachDiChuyen)
+        {
+            if (Location.X + vec.X >= 0 && Location.X + vec.X < 9 && Location.Y + vec.Y >= 0 && Location.Y + vec.Y < 10)
+            {
+                if (Location.X + vec.OChanX >= 0 && Location.X + vec.OChanX < 9 && Location.Y + vec.OChanY >= 0 && Location.Y + vec.OChanY < 10)
+                    if (BanCo.Instance.OCos[Location.X + vec.OChanX][Location.Y + vec.OChanY].CurrentQuanCo == null)
+                        ListOCoTaget.Add(BanCo.Instance.OCos[Location.X + vec.X][Location.Y + vec.Y]);
+            }
+        }
+
+        ChuyenListTargetSangTarget();
     }
 
    
 
     
 }
+
+
+

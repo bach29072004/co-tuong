@@ -75,15 +75,7 @@ public class OCo : MonoBehaviour
             }
         }
     }
-
-    public void ThayDoiTrangThai(EOcoState currentState)
-    {
-        if (currentState == EOcoState.Selected)
-        {
-            
-        }
-    }
-
+    
     public QuanCo CurrentQuanCo;
     public CLocation Location { get; private set; }
 
@@ -99,7 +91,7 @@ public class OCo : MonoBehaviour
     
     public void TargetClick()
     {
-        BanCo.instance.MakeAMove(this);
+        BanCo.Instance.MakeAMove(this);
     }
     [ContextMenu("changcolor")]
     public void ChangeColor()

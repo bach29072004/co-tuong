@@ -26,19 +26,16 @@ public class QuanTot : QuanCo
         if (Location.Y >= 5)
         {
             if (Location.X > 0)
-                ListOCoTaget.Add(BanCo.instance.OCos[Location.X - 1][Location.Y]);
+                ListOCoTaget.Add(BanCo.Instance.OCos[Location.X - 1][Location.Y]);
             if (Location.X < 7)
             {
-                ListOCoTaget.Add(BanCo.instance.OCos[Location.X  +1 ][Location.Y]);
+                ListOCoTaget.Add(BanCo.Instance.OCos[Location.X  +1 ][Location.Y]);
             }
         }
 
         if (Location.Y < 9)
-            ListOCoTaget.Add(BanCo.instance.OCos[Location.X][Location.Y + 1]);
-        foreach (var tar in ListOCoTaget)
-        {
-            tar.trangThai = EOcoState.Target;
-        }
+            ListOCoTaget.Add(BanCo.Instance.OCos[Location.X][Location.Y + 1]);
+        ChuyenListTargetSangTarget();
     }
 
     public override void RedSelected()
@@ -46,19 +43,16 @@ public class QuanTot : QuanCo
         if (Location.Y < 5)
         {
             if (Location.X > 0)
-                ListOCoTaget.Add(BanCo.instance.OCos[Location.X - 1][Location.Y]);
+                ListOCoTaget.Add(BanCo.Instance.OCos[Location.X - 1][Location.Y]);
             if (Location.X < 7)
             {
-                ListOCoTaget.Add(BanCo.instance.OCos[Location.X + 1][Location.Y]);
+                ListOCoTaget.Add(BanCo.Instance.OCos[Location.X + 1][Location.Y]);
             }
         }
 
         if (Location.Y > 0)
-            ListOCoTaget.Add(BanCo.instance.OCos[Location.X][Location.Y -1]);
-        foreach (var tar in ListOCoTaget)
-        {
-            tar.trangThai = EOcoState.Target;
-        }
+            ListOCoTaget.Add(BanCo.Instance.OCos[Location.X][Location.Y -1]);
+        ChuyenListTargetSangTarget();
     }
 
     

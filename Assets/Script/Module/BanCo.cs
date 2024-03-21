@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 
 public class BanCo : MonoBehaviour
 {
-    public static BanCo instance;
+    public static BanCo Instance;
     public GameObject oCoPf;
     private OCo[][] _oCos;
     public float KhoangCachOCo;
@@ -26,7 +26,7 @@ public class BanCo : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
     //[ContextMenu("intitBanCo")]
     public void InitBanCo()
